@@ -1,0 +1,26 @@
+<h1>Url Shortener</h1>
+
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+
+<%= form_tag("urls", method: "post") do %>
+  <%= text_field(:url, :original_url) %>
+  <%= submit_tag "Shorten" %>
+<% end %>
+
+<h2>Shortened Urls</h2>
+
+<table>
+  <tr>
+    <th>Original</th>
+    <th>Shortened</th>
+  </tr>
+
+<% @urls.each do |url| %>
+  <tr>
+    <td><%= url.original_url %></td>
+    <td><%= link_to root_url + url.short_url, root_url + url.short_url, target: :_blank%></td>
+  </tr>
+<% end %>
+</table>
